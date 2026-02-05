@@ -1,7 +1,6 @@
 # 🛡️ Guardian - Web Scam Analyzer
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/Bawan2001/URL-Checker)
-
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://advanced-url.streamlit.app/
 A comprehensive web application for analyzing URLs to detect scams, phishing attempts, and security threats using multiple threat intelligence APIs and machine learning.
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
