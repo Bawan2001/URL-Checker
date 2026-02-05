@@ -2,6 +2,7 @@
 
 A comprehensive web application for analyzing URLs to detect scams, phishing attempts, and security threats using multiple threat intelligence APIs and machine learning.
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://advanced-url.streamlit.app/)
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)

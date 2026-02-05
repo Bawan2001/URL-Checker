@@ -59,15 +59,35 @@ class WebScamAnalyzer:
     ]
     
     def __init__(self):
-        """Initialize the analyzer with API keys from environment."""
-        self.virustotal_api_key = os.getenv('VIRUSTOTAL_API_KEY')
-        self.google_safe_browsing_key = os.getenv('GOOGLE_SAFE_BROWSING_API_KEY')
-        self.abuseipdb_key = os.getenv('ABUSEIPDB_API_KEY')
-        self.urlscan_key = os.getenv('URLSCAN_API_KEY')
+        """Initialize the analyzer with API keys from environment or Streamlit secrets."""
+        # Try to get from st.secrets first if available (Streamlit Cloud), then os.getenv (Local)
+        # Note: Streamlit Cloud caches secrets, so we try-except the import to keep this module portable
+        self.virustotal_api_key = self._get_key('VIRUSTOTAL_API_KEY')
+        self.google_safe_browsing_key = self._get_key('GOOGLE_SAFE_BROWSING_API_KEY')
+        self.abuseipdb_key = self._get_key('ABUSEIPDB_API_KEY')
+        self.urlscan_key = self._get_key('URLSCAN_API_KEY')
+        
         self.session = requests.Session()
         self.session.headers.update({
             'User-Agent': 'WebScamAnalyzer/1.0'
         })
+
+    def _get_key(self, key_name: str) -> Optional[str]:
+        """Helper to get API key from environment or Streamlit secrets."""
+        # Method 1: Environment Variable (Local .env)
+        val = os.getenv(key_name)
+        if val:
+            return val
+            
+        # Method 2: Streamlit Secrets (Cloud)
+        try:
+            import streamlit as st
+            if key_name in st.secrets:
+                return st.secrets[key_name]
+        except:
+            pass
+            
+        return None
     
     def analyze_url(self, url: str) -> Dict:
         """
